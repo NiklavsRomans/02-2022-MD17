@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <img src="src\images\work7.png" width="750" title="Single Character Page">
+  <img src="src\images\work7.png" width="750" title="page404">
 </p>
 
 <p align="center">
