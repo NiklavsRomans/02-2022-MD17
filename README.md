@@ -13,10 +13,6 @@
 </p>
 
 <p align="center">
-  <img src="src\images\work7.png" width="750" title="page404">
-</p>
-
-<p align="center">
   <img src="src\images\work3.PNG" width="750" title="Characters Page">
 </p>
 
