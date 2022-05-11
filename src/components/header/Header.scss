@@ -1,0 +1,23 @@
+.navigation {
+    display: flex;
+    gap:50px;
+    padding: 20px;
+    font-size: 36px;
+    justify-content: center;
+}
+
+.link {
+    text-decoration: none;
+    color: rgb(216, 216, 216);
+    cursor: pointer;
+    &:hover {
+        opacity: 0.7;
+        color: deeppink;
+        transition: all 0.6s ease 0s;
+    }
+}
+
+.link--active {
+    color: deeppink;
+    text-decoration: underline;
+}
