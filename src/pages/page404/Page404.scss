@@ -1,0 +1,27 @@
+.button404 {
+    padding: 20px 40px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    background-color: rgb(65, 15, 54);
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    &:hover {
+        box-shadow: 0 0 10px #f000a8;
+        transition: all 0.6s ease 0s;
+    }
+}
+
+.info404 {
+    background-color: rgb(0, 0, 0);
+    font-size: 80px;
+    color: rgb(255, 82, 183);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+}
+
+.box404 {
+    display: flex;
+    justify-content: center;
+}

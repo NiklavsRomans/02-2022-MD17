@@ -1,0 +1,38 @@
+.single-card__box {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+
+.single-card__container {
+    display: flex;
+    justify-content: center;
+    margin-top: 90px;
+}
+
+
+
+
+.switch-btn {
+    padding: 12px 42px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    &:hover {
+        box-shadow: 0 0 40px #ff009d;
+        transition: all 0.6s ease 0s;
+    }
+    
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+}
+
+.card__box--content {
+    font-family: 'Viga', sans-serif;
+}
