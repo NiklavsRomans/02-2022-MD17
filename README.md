@@ -1,5 +1,5 @@
 # Screenshots
 
 <p align="center">
-  <img src="src\images\work1.png" width="750" title="Home Page">
+  <img src="src\images\work1.png" width="650" title="Home">
 </p>
