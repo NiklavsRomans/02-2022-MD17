@@ -52,9 +52,6 @@ const Episodes = () => {
             </div>
           </div>
           <div className="col-xs-12">
-            <div className="loader-box">
-              {loading && <Loader />}
-            </div>
             <div className="episode-container">
               {episodes && episodes.map((
                 {
