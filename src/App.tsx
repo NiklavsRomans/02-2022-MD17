@@ -15,14 +15,38 @@ const App = () => (
     <Router>
       <Header />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/characters" element={<Characters />} />
-        <Route path="/characters/:id" element={<Character />} />
-        <Route path="/episode" element={<Episodes />} />
-        <Route path="/episode/:id" element={<Episode />} />
-        <Route path="/location" element={<Locations />} />
-        <Route path="/location/:id" element={<LocationPage />} />
-        <Route path="*" element={<Page404 />} />
+        <Route
+          path="/"
+          element={<HomePage />}
+        />
+        <Route
+          path="/characters"
+          element={<Characters />}
+        />
+        <Route
+          path="/characters/:id"
+          element={<Character />}
+        />
+        <Route
+          path="/episode"
+          element={<Episodes />}
+        />
+        <Route
+          path="/episode/:id"
+          element={<Episode />}
+        />
+        <Route
+          path="/location"
+          element={<Locations />}
+        />
+        <Route
+          path="/location/:id"
+          element={<LocationPage />}
+        />
+        <Route
+          path="*"
+          element={<Page404 />}
+        />
       </Routes>
     </Router>
   </div>
