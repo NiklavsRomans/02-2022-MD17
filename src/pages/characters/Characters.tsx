@@ -35,21 +35,25 @@ const Characters = () => {
     {
       title: 'All',
       color: 'white',
+      id: 1,
       onClick: () => setFilteredCharacters(''),
     },
     {
       title: 'Dead',
       color: '#cc0000',
+      id: 2,
       onClick: () => setFilteredCharacters('?status=dead'),
     },
     {
       title: 'Alive',
       color: 'green',
+      id: 3,
       onClick: () => setFilteredCharacters('?status=alive'),
     },
     {
       title: 'Unknown',
       color: 'grey',
+      id: 4,
       onClick: () => setFilteredCharacters('?status=unknown'),
     },
   ];
@@ -70,7 +74,7 @@ const Characters = () => {
                   className="filter-button"
                   onClick={button.onClick}
                   style={{ backgroundColor: button.color }}
-                  key={button.title}
+                  key={button.id}
                 >
                   {button.title}
 
