@@ -73,8 +73,10 @@ const EpisodePage = () => {
           </div>
         </div>
       )}
-      {loading && <Loader />}
-      {errorMessage && <span>{errorMessage}</span>}
+      <div className="loader-box">
+        {loading && <Loader />}
+        {errorMessage && <span>{errorMessage}</span>}
+      </div>
     </div>
   );
 };

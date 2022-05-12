@@ -44,7 +44,7 @@ const CharacterPage = () => {
                   className="switch-btn"
                   onClick={() => { navigate(`/characters/${Number(id) - 1}`); }}
                 >
-                  prev
+                  Prev
 
                 </button>
               </div>
@@ -79,8 +79,10 @@ const CharacterPage = () => {
           </div>
         </div>
       )}
-      {loading && <Loader />}
-      {errorMessage && <span>{errorMessage}</span>}
+      <div className="loader-box">
+        {loading && <Loader />}
+        {errorMessage && <span>{errorMessage}</span>}
+      </div>
     </div>
   );
 };

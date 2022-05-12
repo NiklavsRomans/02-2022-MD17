@@ -12,30 +12,6 @@ const Characters = () => {
   const [filteredCharacters, setFilteredCharacters] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
 
-  // Buttons
-  const buttons = [
-    {
-      title: 'All',
-      bgColor: 'white',
-      onClick: () => setFilteredCharacters(''),
-    },
-    {
-      title: 'Alive',
-      bgColor: 'green',
-      onClick: () => setFilteredCharacters('?status=alive'),
-    },
-    {
-      title: 'Dead',
-      bgColor: '#cc0000',
-      onClick: () => setFilteredCharacters('?status=dead'),
-    },
-    {
-      title: 'Unknown',
-      bgColor: 'grey',
-      onClick: () => setFilteredCharacters('?status=unknown'),
-    },
-  ];
-
   // Get Characters API
   const getCharacters = async () => {
     setLoading(true);
@@ -54,6 +30,30 @@ const Characters = () => {
     }
   };
 
+  // Buttons
+  const buttons = [
+    {
+      title: 'All',
+      color: 'white',
+      onClick: () => setFilteredCharacters(''),
+    },
+    {
+      title: 'Dead',
+      color: '#cc0000',
+      onClick: () => setFilteredCharacters('?status=dead'),
+    },
+    {
+      title: 'Alive',
+      color: 'green',
+      onClick: () => setFilteredCharacters('?status=alive'),
+    },
+    {
+      title: 'Unknown',
+      color: 'grey',
+      onClick: () => setFilteredCharacters('?status=unknown'),
+    },
+  ];
+
   // UseEffect
   useEffect(() => {
     getCharacters().then();
@@ -69,7 +69,7 @@ const Characters = () => {
                 <button
                   className="filter-button"
                   onClick={button.onClick}
-                  style={{ backgroundColor: button.bgColor }}
+                  style={{ backgroundColor: button.color }}
                   key={button.title}
                 >
                   {button.title}
@@ -81,7 +81,7 @@ const Characters = () => {
         </div>
         <div className="row">
           <div className="col-xs-12">
-            <div className="box">
+            <div className="loader-box">
               {loading && <Loader />}
               <div className="card-container">
                 {characters && characters.map((

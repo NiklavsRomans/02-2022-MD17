@@ -35,6 +35,7 @@ const Episodes = () => {
     getEpisodes().then();
   }, [searchText]);
 
+  // Handler event
   const handleSearch = () => {
     const newEpisodes = episodes?.filter((namee) => namee.name.toLowerCase().includes(searchText.toLowerCase()));
     setEpisodes(newEpisodes);
@@ -51,7 +52,9 @@ const Episodes = () => {
             </div>
           </div>
           <div className="col-xs-12">
-            {loading && <Loader />}
+            <div className="loader-box">
+              {loading && <Loader />}
+            </div>
             <div className="episode-container">
               {episodes && episodes.map((
                 {
