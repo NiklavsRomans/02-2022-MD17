@@ -10,14 +10,13 @@ const Episodes = () => {
   const [episodes, setEpisodes] = useState<Episode[]>();
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
-  const [filteredEpisodes, setFilteredEpisodes] = useState<string>('');
   const [searchText, setSearchText] = useState<string>('');
 
   // Get Episodes API
   const getEpisodes = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`https://rickandmortyapi.com/api/episode/${filteredEpisodes}`);
+      const response = await axios.get('https://rickandmortyapi.com/api/episode/');
       setEpisodes(response.data.results);
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -34,7 +33,7 @@ const Episodes = () => {
   // UseEffect
   useEffect(() => {
     getEpisodes().then();
-  }, [filteredEpisodes]);
+  }, [searchText]);
 
   const handleSearch = () => {
     const newEpisodes = episodes?.filter((namee) => namee.name.toLowerCase().includes(searchText.toLowerCase()));
