@@ -2,7 +2,6 @@ import './Episodes.scss';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Episode } from '../../Models/EpisodeModel';
-import Loader from '../../components/loader/Loader';
 import EpisodeCard from '../../components/episodeCard/EpisodeCard';
 
 const Episodes = () => {
