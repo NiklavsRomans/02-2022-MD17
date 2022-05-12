@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Episode } from '../../Models/EpisodeModel';
 import EpisodeCard from '../../components/episodeCard/EpisodeCard';
+import Loader from '../../components/loader/Loader';
 
 const Episodes = () => {
   // UseStates
@@ -65,6 +66,9 @@ const Episodes = () => {
                 />
               ))}
               {errorMessage && setErrorMessage}
+              <div className="loader-box">
+                {loading && <Loader />}
+              </div>
             </div>
           </div>
         </div>
