@@ -71,7 +71,7 @@ const Characters = () => {
             <div className="button-container">
               {buttons.map((button) => (
                 <button
-                  className="filter-button"
+                  className="next-button"
                   onClick={button.onClick}
                   style={{ backgroundColor: button.color }}
                   key={button.id}
