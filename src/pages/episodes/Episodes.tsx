@@ -37,7 +37,7 @@ const Episodes = () => {
 
   // Handler event
   const handleSearch = () => {
-    const newEpisodes = episodes?.filter((namee) => namee.name.toLowerCase().includes(searchText.toLowerCase()));
+    const newEpisodes = episodes?.filter((episode) => episode.name.toLowerCase().includes(searchText.toLowerCase()));
     setEpisodes(newEpisodes);
   };
 
