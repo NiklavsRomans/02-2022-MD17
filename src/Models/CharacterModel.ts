@@ -17,6 +17,7 @@ export type Origin = {
     name: string
     url: string
 }
+
  type Location = {
     name: string
     url: string

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import CharacterCard from '../../components/characterCard/CharacterCard';
 import Loader from '../../components/loader/Loader';
 import { Character } from '../../Models/CharacterModel';
+import { Info } from '../../Models/InfoModel';
 
 const Characters = () => {
   // UseStates
@@ -11,13 +12,16 @@ const Characters = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [filteredCharacters, setFilteredCharacters] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [pages, setPages] = useState<Info>();
 
   // Get Characters API
   const getCharacters = async () => {
     setLoading(true);
     try {
       const response = await axios.get(`https://rickandmortyapi.com/api/character/${filteredCharacters}`);
+      const responeTwo = await axios.get('https://rickandmortyapi.com/api/character');
       setCharacters(response.data.results);
+      setPages(responeTwo.data.info.pages);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const message = error.response?.status === 404 ? 'Nothing to dislplay' : error.message;

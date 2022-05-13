@@ -1,6 +1,7 @@
 import './Episodes.scss';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useSearchParams } from 'react-router-dom';
 import { Episode } from '../../Models/EpisodeModel';
 import EpisodeCard from '../../components/episodeCard/EpisodeCard';
 import Loader from '../../components/loader/Loader';
@@ -11,12 +12,13 @@ const Episodes = () => {
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [searchText, setSearchText] = useState<string>('');
+  const [searchParams, setSearchParams] = useSearchParams('');
 
   // Get Episodes API
   const getEpisodes = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('https://rickandmortyapi.com/api/episode/');
+      const response = await axios.get(`https://rickandmortyapi.com/api/episode/?${searchParams}`);
       setEpisodes(response.data.results);
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -33,13 +35,7 @@ const Episodes = () => {
   // UseEffect
   useEffect(() => {
     getEpisodes().then();
-  }, [searchText]);
-
-  // Handler event
-  const handleSearch = () => {
-    const newEpisodes = episodes?.filter((episode) => episode.name.toLowerCase().includes(searchText.toLowerCase()));
-    setEpisodes(newEpisodes);
-  };
+  }, [searchParams]);
 
   return (
     <div className="main">
@@ -48,7 +44,7 @@ const Episodes = () => {
           <div className="col-xs-12">
             <div className="search-box">
               <input className="input" type="text" onChange={(e) => setSearchText(e.target.value)} />
-              <button onClick={handleSearch}>Search Episode</button>
+              <button onClick={() => { setSearchParams({ name: searchText }); }}>Search Episode</button>
             </div>
           </div>
           <div className="col-xs-12">

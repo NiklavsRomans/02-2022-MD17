@@ -4,11 +4,13 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Character } from '../../Models/CharacterModel';
 import Loader from '../../components/loader/Loader';
+import { Info } from '../../Models/InfoModel';
 
 const CharacterPage = () => {
   const [character, setCharacter] = useState<Character>();
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [info, setInfo] = useState<Info>();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -16,7 +18,9 @@ const CharacterPage = () => {
     setLoading(true);
     try {
       const response = await axios.get(`https://rickandmortyapi.com/api/character/${id}`);
+      const responseTwo = await axios.get('https://rickandmortyapi.com/api/character');
       setCharacter(response.data);
+      setInfo(responseTwo.data.info);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const message = error.response?.status === 404 ? 'Nothing to show' : error.message;
@@ -41,6 +45,7 @@ const CharacterPage = () => {
             <div className="col-xs-4">
               <div className="btn-container">
                 <button
+                  disabled={Number(id) === 1}
                   className="switch-btn"
                   onClick={() => { navigate(`/characters/${Number(id) - 1}`); }}
                 >
@@ -68,6 +73,7 @@ const CharacterPage = () => {
             <div className="col-xs-4">
               <div className="btn-container">
                 <button
+                  disabled={Number(id) === info?.count}
                   className="switch-btn"
                   onClick={() => { navigate(`/characters/${Number(id) + 1}`); }}
                 >

@@ -25,6 +25,9 @@
         box-shadow: 0 0 40px #ff009d;
         transition: all 0.6s ease 0s;
     }
+    &:disabled {
+        cursor: not-allowed;
+    }
     
 }
 

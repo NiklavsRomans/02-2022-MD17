@@ -4,11 +4,13 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Loader from '../../components/loader/Loader';
 import { Episode } from '../../Models/EpisodeModel';
+import { Info } from '../../Models/InfoModel';
 
 const EpisodePage = () => {
   const [episode, setEpisode] = useState<Episode>();
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [info, setInfo] = useState<Info>();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -16,7 +18,9 @@ const EpisodePage = () => {
     setLoading(true);
     try {
       const response = await axios.get(`https://rickandmortyapi.com/api/episode/${id}`);
+      const responseTwo = await axios.get('https://rickandmortyapi.com/api/episode');
       setEpisode(response.data);
+      setInfo(responseTwo.data.info);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const message = error.response?.status === 404 ? 'Nothing to show' : error.message;
@@ -55,6 +59,7 @@ const EpisodePage = () => {
             <div className="col-xs-12">
               <div className="episode-btn">
                 <button
+                  disabled={Number(id) === 1}
                   onClick={() => { navigate(`/episode/${Number(id) - 1}`); }}
                   className="switch-btn"
                 >
@@ -62,6 +67,7 @@ const EpisodePage = () => {
 
                 </button>
                 <button
+                  disabled={Number(id) === info?.count}
                   onClick={() => { navigate(`/episode/${Number(id) + 1}`); }}
                   className="switch-btn"
                 >
