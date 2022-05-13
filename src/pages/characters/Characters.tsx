@@ -1,6 +1,8 @@
+/* eslint-disable react/no-children-prop */
 import './Characters.scss';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import CharacterCard from '../../components/characterCard/CharacterCard';
 import Loader from '../../components/loader/Loader';
 import { Character } from '../../Models/CharacterModel';
@@ -12,16 +14,21 @@ const Characters = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [filteredCharacters, setFilteredCharacters] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
-  const [pages, setPages] = useState<Info>();
+  const [hasMore, setHasMore] = useState<boolean>(true);
+  const [nextPage, setNextPage] = useState<string>('');
 
   // Get Characters API
   const getCharacters = async () => {
     setLoading(true);
     try {
       const response = await axios.get(`https://rickandmortyapi.com/api/character/${filteredCharacters}`);
-      const responeTwo = await axios.get('https://rickandmortyapi.com/api/character');
       setCharacters(response.data.results);
-      setPages(responeTwo.data.info.pages);
+      if (response.data.info.next === null) {
+        setHasMore(false);
+      } else {
+        setNextPage(response.data.info.next);
+        setHasMore(true);
+      }
     } catch (error) {
       if (axios.isAxiosError(error)) {
         const message = error.response?.status === 404 ? 'Nothing to dislplay' : error.message;
@@ -32,6 +39,27 @@ const Characters = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const fetchMoreCharacters = async () => {
+    setLoading(true);
+    try {
+      if (nextPage) {
+        const response = await axios.get(nextPage);
+        setNextPage(response.data.info.next);
+        const data = response.data.results;
+        return data;
+      }
+      setHasMore(false);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const message = error.response?.status === 404 ? '404 not Found' : error.message;
+        setErrorMessage(message);
+      } else {
+        setErrorMessage('Not Axious error');
+      }
+    }
+    return [];
   };
 
   // Buttons
@@ -67,6 +95,13 @@ const Characters = () => {
     getCharacters().then();
   }, [filteredCharacters]);
 
+  const fetchData = async () => {
+    const moreCharacters = await fetchMoreCharacters();
+    if (characters) {
+      setCharacters([...characters, ...moreCharacters]);
+    }
+  };
+
   return (
     <div className="main">
       <div className="container">
@@ -89,6 +124,16 @@ const Characters = () => {
         </div>
         <div className="row">
           <div className="col-xs-12">
+            {characters && (
+              <InfiniteScroll
+                dataLength={characters.length}
+                next={fetchData}
+                hasMore={hasMore}
+                loader={<h3>.</h3>}
+                endMessage={(<p>You seen it all</p>)}
+                children={undefined}
+              />
+            )}
             <div className="loader-box">
               {loading && <Loader />}
               <div className="card-container">
